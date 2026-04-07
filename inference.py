@@ -13,9 +13,9 @@ from env.graders import grade_task
 # ===== ENV CONFIG =====
 API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
 MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
-HF_TOKEN = os.getenv("HF_TOKEN")   # ✅ FIXED (no fallback)
+HF_TOKEN = os.getenv("HF_TOKEN")   # FIXED (no fallback)
 
-# ❗ REQUIRED CHECK (for compliance)
+# REQUIRED CHECK (for compliance)
 if HF_TOKEN is None:
     raise ValueError("HF_TOKEN environment variable is required")
 
@@ -86,7 +86,7 @@ action_type|content
 
 # ===== MAIN LOOP =====
 def main():
-    # ✅ FIXED: using HF_TOKEN properly
+    
     client = OpenAI(base_url=API_BASE_URL, api_key=HF_TOKEN)
 
     env = ITSupportEnv()
@@ -114,7 +114,7 @@ def main():
 
         log_step(step, f"{action.action_type}:{action.content}", reward, done)
 
-    # Final grading
+
     score = grade_task(history, env.current_task["solution"])
     success = score >= 0.5
 
