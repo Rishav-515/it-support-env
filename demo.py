@@ -3,7 +3,7 @@ import requests
 BASE_URL = "https://rishav-515-it-support-env.hf.space"
 
 def run_demo():
-    print("🔄 Resetting environment...")
+    print("Resetting environment...")
     res = requests.post(f"{BASE_URL}/reset")
     print("Reset Response:", res.json())
 
