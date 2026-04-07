@@ -7,14 +7,14 @@ def run_demo():
     res = requests.post(f"{BASE_URL}/reset")
     print("Reset Response:", res.json())
 
-    print("\n➡ Step 1: Asking question")
+    print("\n Step 1: Asking question")
     res = requests.post(f"{BASE_URL}/step", json={
         "action_type": "ask_question",
         "content": "What is your internet speed?"
     })
     print(res.json())
 
-    print("\n➡ Step 2: Suggest fix")
+    print("\nStep 2: Suggest fix")
     res = requests.post(f"{BASE_URL}/step", json={
         "action_type": "suggest_fix",
         "content": "restart router"

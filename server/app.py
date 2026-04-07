@@ -10,7 +10,7 @@ app = FastAPI()
 env = ITSupportEnv()
 
 
-# ✅ ROOT ROUTE (fixes "Starting..." issue)
+# ROOT ROUTE (fixes "Starting..." issue)
 @app.get("/")
 def root():
     return {
@@ -19,14 +19,14 @@ def root():
     }
 
 
-# ✅ RESET ENDPOINT
+# RESET ENDPOINT
 @app.post("/reset")
 def reset():
     obs = env.reset()
     return obs.dict()
 
 
-# ✅ STEP ENDPOINT
+# STEP ENDPOINT
 @app.post("/step")
 def step(action: dict):
     act = Action(**action)
@@ -40,7 +40,7 @@ def step(action: dict):
     }
 
 
-# ✅ IMPORTANT: Dynamic port for Hugging Face
+# IMPORTANT: Dynamic port for Hugging Face
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 7860))
     uvicorn.run("server.app:app", host="0.0.0.0", port=port)
