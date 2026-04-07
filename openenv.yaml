@@ -1,0 +1,18 @@
+name: it-support-env
+description: IT Support Troubleshooting Environment for AI agents
+
+actions:
+  - ask_question
+  - suggest_fix
+  - resolve
+  - escalate
+
+observations:
+  - problem
+  - history
+  - status
+
+tasks:
+  - easy
+  - medium
+  - hard
