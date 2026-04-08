@@ -31,8 +31,9 @@ class ITSupportEnv:
 
         self.state.history.append(f"{action.action_type}: {action.content}")
 
-        from env.graders import grade_task
-        score = grade_task(self.state.history, self.current_task["solution"])
+        # Task-specific grader
+        grader = self.current_task["grader"]
+        score = grader(self.state.history, self.current_task["solution"])
 
         if score > 0.8:
             self.state.solved = True
