@@ -11,13 +11,10 @@ from env.graders import grade_task
 
 
 # ===== ENV CONFIG =====
-API_BASE_URL = os.getenv("API_BASE_URL", "https://router.huggingface.co/v1")
-MODEL_NAME = os.getenv("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
-HF_TOKEN = os.getenv("HF_TOKEN")   # FIXED (no fallback)
+API_BASE_URL = os.environ["API_BASE_URL"]
+MODEL_NAME = os.environ.get("MODEL_NAME", "Qwen/Qwen2.5-72B-Instruct")
+API_KEY = os.environ["API_KEY"]
 
-# REQUIRED CHECK (for compliance)
-if HF_TOKEN is None:
-    raise ValueError("HF_TOKEN environment variable is required")
 
 MAX_STEPS = 6
 
@@ -86,6 +83,11 @@ action_type|content
 
 # ===== MAIN LOOP =====
 def main():
+    client = OpenAI(
+        base_url=API_BASE_URL,
+        api_key=API_KEY
+    )
+
     env = ITSupportEnv()
 
     total_scores = []
@@ -93,7 +95,6 @@ def main():
     for episode in range(3):
         observation = env.reset()
 
-        # START LOG
         log_start("it_support", "it_support_env", MODEL_NAME)
 
         history = []
@@ -104,23 +105,13 @@ def main():
         while not done and steps < 5:
             steps += 1
 
-            if steps <= 2:
-                action = Action(
-                    action_type="ask_question",
-                    content="Can you provide more details?"
-                )
-            else:
-                action = Action(
-                    action_type="suggest_fix",
-                    content="restart router"
-                )
+            action = get_action(client, observation.problem, history)
 
             observation, reward, done, _ = env.step(action)
 
             history = observation.history
             rewards.append(reward)
 
-            # STEP LOG
             log_step(
                 steps,
                 f"{action.action_type}:{action.content}",
@@ -128,12 +119,11 @@ def main():
                 done
             )
 
-        # GRADER
         grader = env.current_task["grader"]
         score = grader(history, env.current_task["solution"])
+
         total_scores.append(score)
 
-        # END LOG
         log_end(score > 0.3, steps, score, rewards)
 
 
