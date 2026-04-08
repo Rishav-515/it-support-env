@@ -1,10 +1,6 @@
 ﻿---
 title: it-support-env
-emoji: 🤖
-colorFrom: indigo
-colorTo: purple
 sdk: docker
-app_port: 7860
 ---
 # IT Support RL Environment
 
@@ -37,7 +33,7 @@ This project implements a reinforcement learning-style environment for IT suppor
 
 ### Reward Logic
 - Relevant actions -> positive reward  
-- Irrelevant or repeated actions -> penalty  
+- Irrelevant or repeated actions â†’ penalty  
 
 ---
 
