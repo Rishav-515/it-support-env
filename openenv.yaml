@@ -13,6 +13,32 @@ observations:
   - status
 
 tasks:
-  - easy
-  - medium
-  - hard
+  - id: slow_internet
+    problem: "My internet is very slow"
+    solution: "restart router"
+    keywords:
+      - restart
+      - router
+      - modem
+    difficulty: easy
+    grader: grade_task
+
+  - id: overheating_laptop
+    problem: "My laptop is overheating and shutting down"
+    solution: "clean fan"
+    keywords:
+      - fan
+      - clean
+      - cooling
+    difficulty: medium
+    grader: grade_task
+
+  - id: screen_flickering
+    problem: "My screen is flickering"
+    solution: "update drivers"
+    keywords:
+      - driver
+      - update
+      - graphics
+    difficulty: hard
+    grader: grade_task
