@@ -86,25 +86,24 @@ action_type|content
 
 # ===== MAIN LOOP =====
 def main():
-    from env.environment import ITSupportEnv
-    from env.models import Action
-
     env = ITSupportEnv()
 
     total_scores = []
 
-    # RUN MULTIPLE TASKS (CRITICAL)
-    for episode in range(3):   # MUST be >= 3
+    for episode in range(3):
         observation = env.reset()
+
+        # START LOG
+        log_start("it_support", "it_support_env", MODEL_NAME)
 
         history = []
         done = False
         steps = 0
+        rewards = []
 
         while not done and steps < 5:
             steps += 1
 
-            # simple agent
             if steps <= 2:
                 action = Action(
                     action_type="ask_question",
@@ -117,18 +116,25 @@ def main():
                 )
 
             observation, reward, done, _ = env.step(action)
-            history = observation.history
 
-        # APPLY GRADER PER TASK
+            history = observation.history
+            rewards.append(reward)
+
+            # STEP LOG
+            log_step(
+                steps,
+                f"{action.action_type}:{action.content}",
+                reward,
+                done
+            )
+
+        # GRADER
         grader = env.current_task["grader"]
         score = grader(history, env.current_task["solution"])
-
         total_scores.append(score)
 
-    # final success condition
-    avg_score = sum(total_scores) / len(total_scores)
-
-    print(f"[END] success={avg_score > 0.3} score={avg_score:.2f}")
+        # END LOG
+        log_end(score > 0.3, steps, score, rewards)
 
 
 if __name__ == "__main__":
