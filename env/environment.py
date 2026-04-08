@@ -29,11 +29,12 @@ class ITSupportEnv:
     def step(self, action: Action):
         reward = compute_reward(action, self.current_task)
 
-        # Update history
         self.state.history.append(f"{action.action_type}: {action.content}")
 
-        # Check if solved
-        if action.action_type == "resolve" and reward > 0:
+        from env.graders import grade_task
+        score = grade_task(self.state.history, self.current_task["solution"])
+
+        if score > 0.8:
             self.state.solved = True
 
         done = self.state.solved
