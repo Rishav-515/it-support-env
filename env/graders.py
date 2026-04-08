@@ -1,18 +1,8 @@
-﻿def grade_task(history, correct_solution):
-    """
-    history: list of actions taken
-    correct_solution: expected solution string
-    """
+﻿def grade_task(history, solution):
+    score = 0
 
-    correct_solution = correct_solution.lower()
+    for action in history:
+        if solution.lower() in action.lower():
+            score += 1
 
-    # Check if correct solution was ever used
-    for step in history:
-        if correct_solution in step.lower():
-            return 1.0
-
-    # Partial score if some effort was made
-    if len(history) > 0:
-        return 0.5
-
-    return 0.0
+    return score / max(len(history), 1)

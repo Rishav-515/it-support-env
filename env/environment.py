@@ -1,7 +1,7 @@
 ﻿import random
 from env.models import Observation, Action, State
 from env.tasks import TASKS
-from env.reward import calculate_reward
+from env.reward import compute_reward
 
 
 class ITSupportEnv:
@@ -9,7 +9,7 @@ class ITSupportEnv:
         self.state = None
         self.current_task = None
 
-    # Reset environment (start new problem)
+    # Reset environment
     def reset(self):
         self.current_task = random.choice(TASKS)
 
@@ -27,13 +27,9 @@ class ITSupportEnv:
 
     # Take action
     def step(self, action: Action):
-        reward = calculate_reward(
-            action.action_type,
-            action.content,
-            self.current_task["solution"]
-        )
+        reward = compute_reward(action, self.current_task)
 
-        # Save history
+        # Update history
         self.state.history.append(f"{action.action_type}: {action.content}")
 
         # Check if solved
@@ -49,7 +45,3 @@ class ITSupportEnv:
         )
 
         return observation, reward, done, {}
-
-    # Return current state
-    def state(self):
-        return self.state

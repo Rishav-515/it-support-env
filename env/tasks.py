@@ -1,19 +1,17 @@
-﻿# Each task = problem + correct solution
-
-TASKS = [
+﻿TASKS = [
     {
-        "id": "easy_1",
-        "problem": "My keyboard is not working",
-        "solution": "check keyboard connection",
-    },
-    {
-        "id": "medium_1",
         "problem": "My internet is very slow",
         "solution": "restart router",
+        "keywords": ["restart", "router", "modem"]
     },
     {
-        "id": "hard_1",
         "problem": "My laptop is overheating and shutting down",
-        "solution": "clean fan and check ventilation",
+        "solution": "clean fan",
+        "keywords": ["fan", "clean", "cooling"]
+    },
+    {
+        "problem": "My screen is flickering",
+        "solution": "update drivers",
+        "keywords": ["driver", "update", "graphics"]
     }
 ]
