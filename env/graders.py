@@ -1,16 +1,13 @@
-﻿def grade_task(history, solution):
-    score = 0
+﻿def grade_internet(history):
+    score = sum("router" in h.lower() for h in history) / max(len(history), 1)
+    return min(max(score, 0.01), 0.99)
 
-    for action in history:
-        if solution.lower() in action.lower():
-            score += 1
 
-    raw_score = score / max(len(history), 1)
+def grade_overheating(history):
+    score = sum("fan" in h.lower() or "cool" in h.lower() for h in history) / max(len(history), 1)
+    return min(max(score, 0.01), 0.99)
 
-    # 🚨 Clamp strictly between (0, 1)
-    if raw_score <= 0:
-        return 0.01
-    elif raw_score >= 1:
-        return 0.99
-    else:
-        return raw_score
+
+def grade_screen(history):
+    score = sum("driver" in h.lower() for h in history) / max(len(history), 1)
+    return min(max(score, 0.01), 0.99)
