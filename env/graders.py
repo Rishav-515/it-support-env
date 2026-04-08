@@ -1,4 +1,4 @@
-def grade_task(history, correct_solution):
+﻿def grade_task(history, correct_solution):
     """
     history: list of actions taken
     correct_solution: expected solution string

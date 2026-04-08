@@ -1,4 +1,4 @@
-# Each task = problem + correct solution
+﻿# Each task = problem + correct solution
 
 TASKS = [
     {

@@ -1,4 +1,4 @@
-def calculate_reward(action_type: str, content: str, correct_solution: str):
+﻿def calculate_reward(action_type: str, content: str, correct_solution: str):
     content = content.lower()
     correct_solution = correct_solution.lower()
 

@@ -1,3 +1,11 @@
+﻿---
+title: it-support-env
+emoji: 🤖
+colorFrom: indigo
+colorTo: purple
+sdk: docker
+app_port: 7860
+---
 # IT Support RL Environment
 
 This project implements a reinforcement learning-style environment for IT support troubleshooting. The system simulates how an agent interacts with a user by asking questions and suggesting fixes to resolve technical issues.
@@ -24,20 +32,20 @@ This project implements a reinforcement learning-style environment for IT suppor
 - status: ongoing / resolved
 
 ### Actions
-- ask_question → gather more information  
-- suggest_fix → propose a solution  
+- ask_question -> gather more information  
+- suggest_fix -> propose a solution  
 
 ### Reward Logic
-- Relevant actions → positive reward  
-- Irrelevant or repeated actions → penalty  
+- Relevant actions -> positive reward  
+- Irrelevant or repeated actions -> penalty  
 
 ---
 
 ## API Endpoints
 
-- GET / → Health check  
-- POST /reset → Reset environment  
-- POST /step → Take action  
+- GET / -> Health check  
+- POST /reset -> Reset environment  
+- POST /step -> Take action  
 
 ---
 
