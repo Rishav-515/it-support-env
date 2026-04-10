@@ -44,7 +44,7 @@ def log_end(success: bool, steps: int, score: float, rewards: List[float]):
 # ===== SIMPLE AGENT =====
 def get_action(client, problem, history):
     prompt = f"""
-You are an IT support assistant.
+You are an intelligent IT support assistant.
 
 Problem:
 {problem}
@@ -52,12 +52,22 @@ Problem:
 History:
 {history}
 
+Guidelines:
+- First understand the issue carefully
+- Ask relevant diagnostic questions if needed
+- Suggest fixes ONLY related to the problem
+- Avoid generic or unrelated fixes
+- Examples:
+  - internet issues → router/network fixes
+  - overheating → cooling/hardware fixes
+  - screen issues → driver/display fixes
+
 Choose ONE action:
 - ask_question
 - suggest_fix
 - resolve
 
-Respond in format:
+Respond strictly in format:
 action_type|content
 """
 

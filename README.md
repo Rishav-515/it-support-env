@@ -77,14 +77,39 @@ pip install -r requirements.txt
 
 ## Project Structure
 
-env/
-server/
-demo.py
-requirements.txt
-README.md
+env/                # Core environment logic (state, tasks, reward, graders)
+server/             # FastAPI backend for interaction
+inference.py        # LLM-powered agent execution script
+demo.py             # Local testing script
+client.py           # API interaction client
+Dockerfile          # Deployment configuration
+requirements.txt    # Dependencies
+README.md           # Project documentation
 
 ---
 
-## Author
+## Design Highlights
 
-Rishav Raj
+- Reinforcement learning-style interaction loop
+- Task-specific graders for contextual evaluation
+- Dynamic reward shaping to guide agent behavior
+- LLM-driven decision making for adaptive troubleshooting
+
+## Key Strength
+
+Unlike rule-based systems, this environment:
+- adapts actions based on problem context
+- penalizes incorrect troubleshooting paths
+- simulates real-world IT support workflows
+
+## Future Improvements
+
+- Fine-tuned policy model for action selection
+- Feedback-driven reward optimization
+- Multi-turn conversational memory enhancement
+
+
+## Authors
+
+- Rishav Raj
+- Raunak Raj
